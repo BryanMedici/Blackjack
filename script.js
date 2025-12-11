@@ -9,6 +9,26 @@ const resetBtn = document.getElementById('reset');
 const messageEl = document.getElementById('message');
 const balanceEl = document.getElementById('balance');
 const betEl = document.getElementById('bet');
+const betPlusBtn = document.getElementById('bet-plus');
+const betMinusBtn = document.getElementById('bet-minus');
+
+betPlusBtn.addEventListener('click', () => {
+  let currentBet = parseInt(betEl.value) || 0;
+  currentBet += 100;
+  if (currentBet > balance) {
+    currentBet = balance; // non superare il saldo
+  }
+  betEl.value = currentBet;
+});
+
+betMinusBtn.addEventListener('click', () => {
+  let currentBet = parseInt(betEl.value) || 0;
+  currentBet -= 100;
+  if (currentBet < 1) {
+    currentBet = 1; // non andare sotto 1
+  }
+  betEl.value = currentBet;
+});
 
 
 
@@ -32,26 +52,6 @@ const cards = [
   { name: 'K', value: 10 },
   { name: 'A', value: 11 }
 ];
-const betPlusBtn = document.getElementById('bet-plus');
-const betMinusBtn = document.getElementById('bet-minus');
-
-betPlusBtn.addEventListener('click', () => {
-  let currentBet = parseInt(betEl.value) || 0;
-  currentBet += 100;
-  if (currentBet > balance) {
-    currentBet = balance; // non superare il saldo
-  }
-  betEl.value = currentBet;
-});
-
-betMinusBtn.addEventListener('click', () => {
-  let currentBet = parseInt(betEl.value) || 0;
-  currentBet -= 100;
-  if (currentBet < 1) {
-    currentBet = 1; // non andare sotto 1
-  }
-  betEl.value = currentBet;
-});
 
 function getRandomCard() {
   return cards[Math.floor(Math.random() * cards.length)];
